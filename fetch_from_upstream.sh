@@ -50,7 +50,7 @@ for dir in $cmsis $hal; do
     echo "Processing source code in $dir"
     for file in $(find $dir -name "*.[chs]"); do
         chmod 644 $file
-        cat $file | awk "{sub(/[\t ]*$/,\"\")}1" | expand -t 4 | tr \\200\\205\\211\\221\\222\\223\\224\\226\\231\\244\\261\\265\\302\\327\\342 \'??\'\'\"\"\\-\'??u?x\' > tmp$$
+        cat $file | iconv -f ISO-8859-1 | awk "{sub(/[\t ]*$/,\"\")}1" | expand -t 4 | tr \\200\\205\\211\\221\\222\\223\\224\\226\\231\\244\\261\\265\\302\\327\\342 \'??\'\'\"\"\\-\'??u?x\' > tmp$$
         /bin/mv tmp$$ $file
     done
 done
